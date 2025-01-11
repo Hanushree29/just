@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple API Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      background: #e9ecef;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>API Interaction</h1>
+    <div class="input-group">
+      <label for="inputData">Enter Data:</label>
+      <input type="text" id="inputData" placeholder="Enter your input here">
+    </div>
+    <button id="sendRequest">Send Request</button>
+    <div class="result" id="result">Response will appear here...</div>
+  </div>
+
+  <script>
+    document.getElementById('sendRequest').addEventListener('click', () => {
+      const inputData = document.getElementById('inputData').value;
+      const resultDiv = document.getElementById('result');
+
+      // API request
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'GET',
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Displaying response
+        resultDiv.textContent = JSON.stringify(data, null, 2);
+      })
+      .catch(error => {
+        // Handling errors
+        resultDiv.textContent = 'Error: ' + error.message;
+      });
+    });
+  </script>
+</body>
+</html>
